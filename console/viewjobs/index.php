@@ -1,4 +1,4 @@
-<?php require('access.php'); ?>
+<?php require('.././includes/access.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +67,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<?php require('getData.php'); ?>
+		<?php require('.././includes/getData.php'); ?>
 
 		</tbody>
 	</table>
