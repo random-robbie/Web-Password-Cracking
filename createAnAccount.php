@@ -74,9 +74,8 @@
 
 				<div class="col-lg-6">
 					<select class="form-control" name="advisor" id="advisor">
-						<option>Tom Halverson</option>
-						<option>Josh Pauli</option>
-						<option>Kyle Cronin</option>
+						<option>Site Owner</option>
+
 					</select>
 					<span class="help-block">This person will have to confirm you can access the system. Please don't submit a request without speaking to them first. <br />Currently all requests go to Alex Gartner</span>
 
@@ -84,7 +83,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-lg-6 col-lg-offset-2">
-					<h2>Capcha Here</h2>
+					
 				</div>
 			</div>
 			<div class="form-group">
