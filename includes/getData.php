@@ -34,7 +34,7 @@ function trise($status, $class = null)
 }
 
 try {
-	$db = new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+	require ('config.php');
 
 	$query = $db->prepare("SELECT id, createTime, attackType, hashType, attackMethod, status, mask, dictionary FROM attack where uid=:uid");
 	$query->bindValue(":uid", $_SESSION['uid']);
