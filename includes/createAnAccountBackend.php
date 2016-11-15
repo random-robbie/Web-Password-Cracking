@@ -1,5 +1,5 @@
 <?php
-
+require('config.php');
 if (!$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 	die("Invalid Email");
 }
@@ -9,28 +9,22 @@ if (strlen($_POST['password']) < 10) {
 }
 
 $password = $_POST['password'];
-$managerEmail;
+
 
 switch ($_POST['advisor']) {
-	case "Tom Halverson":
-		$managerEmail = "tom.halverson@dsu.edu";
-		break;
-	case "Josh Pauli":
-		//$advisorEmail = "josh.pauli@dsu.edu";
-		break;
-	case "Kyle Cronin":
-		//$advisorEmail = "kyle.cronin@dsu.edu";
+	case "Site Owner":
+		$managerEmail = $manager;
 		break;
 	default:
 		die("Invalid Advisor");
 }
-$managerEmail = 'agartner01@gmail.com';
+
 
 $passwordSalt = substr(md5(rand()), 0, 8);
 $passwordHash = hash("sha512", $passwordSalt . $password);
 
 try {
-	require('config.php');
+	
 
 	$query = $db->prepare("INSERT INTO users (email, hash, salt) VALUES (:email, :hash, :salt)");
 
@@ -59,13 +53,13 @@ try {
 		$query->bindValue(":conType", 'M');
 	} while (!$query->execute());
 
-	$serverPrefix = 'https://cracking.agartner.com/confirm.php?';
+	
 
 	$emailConfirmStr = $serverPrefix . $emailConfirmChallenge;
 	mail($email,
 		"DSU Cracking Email Confirmation",
 		"Please go to the following link to confirm your account: " . $emailConfirmStr,
-		"From: no-reply@dsu.edu"
+		"From: ".$from.""
 	);
 
 	$managerConfirmString = $serverPrefix . $managerConfirmChallenge;
@@ -74,7 +68,7 @@ try {
 	mail($managerEmail,
 		"DSU Cracking User Confirmation",
 		$managerMessage,
-		"From: no-reply@dsu.edu"
+		"From: ".$from.""
 	);
 
 	$db = 0;
