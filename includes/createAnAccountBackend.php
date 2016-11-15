@@ -30,7 +30,7 @@ $passwordSalt = substr(md5(rand()), 0, 8);
 $passwordHash = hash("sha512", $passwordSalt . $password);
 
 try {
-	$db = new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+	require('config.php');
 
 	$query = $db->prepare("INSERT INTO users (email, hash, salt) VALUES (:email, :hash, :salt)");
 
