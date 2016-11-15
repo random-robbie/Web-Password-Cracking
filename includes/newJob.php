@@ -94,7 +94,7 @@ if ($attack_type_invalid || $hash_type_invalid || $hashes_invalid || $attack_met
 }
 else {
 	try {
-		$db = new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+		require ('config.php');
 		$query = $db->prepare("INSERT INTO attack (hashType, attackType, attackMethod, mask, dictionary, uid)
 								VALUES (:hashType, :attackType, :attackMethod, :mask, :dictionary, :uid)");
 
