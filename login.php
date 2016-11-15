@@ -52,7 +52,7 @@
 
 	if (isset($_POST['email']) && isset($_POST['password'])) {
 		try {
-			$db = new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+			require ('./includes/config.php');
 			$query = $db->prepare("SELECT id, hash, salt, isSuperUser, emailConfirmed, managerConfirmed FROM users WHERE email = :email");
 			//TODO: also grab managerConfirmed and emailConfirmed and check those b4
 			$query->bindParam(':email', $_POST['email']);
@@ -62,10 +62,13 @@
 			$row = $query->fetch();
 
 			$passwordHash = hash("sha512", $row['salt'] . $_POST['password']);
-
+			$emailConfirmed = boolval($row['emailConfirmed']);
+			$managerConfirmed = boolval($row['managerConfirmed']);
+			
 			if ($passwordHash == $row['hash']) {
-				if ($row['emailConfirmed'] == 1) {
-					if ($row['managerConfirmed'] == 1) {
+		
+				if ($emailConfirmed == 1) {
+					if ($managerConfirmed == 1) {
 						$_SESSION['loggedIn'] = true;
 						$_SESSION['uid'] = $row['id'];
 						$_SESSION['isSuperUser'] = boolval($row['isSuperUser']);
