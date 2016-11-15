@@ -1,6 +1,6 @@
 <?php
 
-$db = new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+require ('./includes/config.php');
 $challenge = $db->quote($_SERVER['QUERY_STRING']);
 $result = $db->query("select id, uid, conType from confirmation where challenge=$challenge")->fetch(PDO::FETCH_ASSOC);
 
