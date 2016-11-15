@@ -45,8 +45,9 @@ function changeJobStatus($db, $jobId, $status)
 
 //TODO: move to globals
 function connectToDatabase()
-{
-	return new PDO("mysql:host=localhost;dbname=cracking", "cracking", "DATABASE_PASSWORD");
+{	
+	require('config.php');
+	return $db;
 }
 
 $db = connectToDatabase();
